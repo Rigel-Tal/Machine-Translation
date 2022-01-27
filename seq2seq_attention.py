@@ -192,7 +192,7 @@ class Seq2Seq(nn.Module):
         return outputs
 
 
-### We're ready to define everything we need for training our Seq2Seq model ###
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 load_model = False
 save_model = True
@@ -283,12 +283,6 @@ for epoch in range(num_epochs):
         output = model(inp_data, target)
         # Output: (trg_len, batch_size, output_dim)
 
-        # Output is of shape (trg_len, batch_size, output_dim) but Cross Entropy Loss
-        # doesn't take input in that form. For example if we have MNIST we want to have
-        # output to be: (N, 10) and targets just (N). Here we can view it in a similar
-        # way that we have output_words * batch_size that we want to send in into
-        # our cost function, so we need to do some reshapin. While we're at it
-        # Let's also remove the start token while we're at it
         output = output[1:].reshape(-1, output.shape[2])
         target = target[1:].reshape(-1)
 

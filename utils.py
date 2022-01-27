@@ -5,10 +5,6 @@ import sys
 
 
 def translate_sentence(model, sentence, german, english, device, max_length=50):
-    # print(sentence)
-
-    # sys.exit()
-
     # Load german tokenizer
     spacy_ger = spacy.load('de_core_news_sm')
 
@@ -18,9 +14,6 @@ def translate_sentence(model, sentence, german, english, device, max_length=50):
     else:
         tokens = [token.lower() for token in sentence]
 
-    # print(tokens)
-
-    # sys.exit()
     # Add <SOS> and <EOS> in beginning and end respectively
     tokens.insert(0, german.init_token)
     tokens.append(german.eos_token)
